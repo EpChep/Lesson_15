@@ -41,11 +41,11 @@ public class WildberriesTest {
 
     @Test(dependsOnMethods = "testAddToCart")
     public void testGoToCart() {
-        // Переход в корзину
+
         WebElement cartButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"basketContent\"]/div[3]/a")));
         cartButton.click();
 
-        // Получаем названия, количество и цены товаров в корзине
+
         double totalSum = 0.0;
         for (int i = 1; i <= 3; i++) {
             WebElement productNameElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[4]/div/div[1]/form/div[1]/div[1]/div[2]/div/div[2]/div/div/div[" + i + "]/div/div[1]/div/a/span[1]")));
@@ -56,14 +56,14 @@ public class WildberriesTest {
 
             WebElement productPriceElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[4]/div/div[1]/form/div[1]/div[1]/div[2]/div/div[2]/div/div/div[" + i + "]/div/div[3]/div[3]")));
             String productPriceText = productPriceElement.getText();
-            double productPrice = Double.parseDouble(productPriceText.replaceAll("[^0-9\\.]", "")); // извлечение числа из текста
+            double productPrice = Double.parseDouble(productPriceText.replaceAll("[^0-9\\.]", ""));
 
             totalSum += Double.parseDouble(productQuantity) * productPrice;
 
             System.out.println("Товар " + i + ": " + productName + ", Количество: " + productQuantity + ", Цена: " + productPrice);
         }
 
-        // Получаем общую сумму
+
         WebElement totalSumElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[4]/div/div[1]/form/div[2]/div/div/div/div[2]/p/span[2]/span")));
         String totalSumText = totalSumElement.getText();
         double total = Double.parseDouble(totalSumText.replaceAll("[^0-9\\.]", ""));
@@ -71,8 +71,8 @@ public class WildberriesTest {
 
     }
 
-   // @AfterTest
-    //public void tearDown() {
-      //  driver.quit();
-    //}
+   /*@AfterTest
+    public void tearDown() {
+       driver.quit();
+    */}
 }
