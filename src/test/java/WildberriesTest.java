@@ -8,6 +8,7 @@ import java.time.Duration;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import org.testng.Assert;
 
 public class WildberriesTest {
     private WebDriver driver;
@@ -18,22 +19,22 @@ public class WildberriesTest {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver-win64/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Инициализация ожидания
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     @Test
     public void testAddToCart() {
         driver.get("https://www.wildberries.ru/");
 
-        // Явное ожидание загрузки элемента
+
         WebElement product1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[2]/div/div[2]/div/article[3]/div/div[3]/p[3]/a")));
         product1.click();
 
-        // Выбор товара 2
+
         WebElement product2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[2]/div/div[2]/div/article[4]/div/div[3]/p[3]/a")));
         product2.click();
 
-        // Выбор товара 3
+
         WebElement product3 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[2]/div/div[2]/div/article[5]/div/div[3]/p[3]/a")));
         product3.click();
     }
@@ -43,10 +44,22 @@ public class WildberriesTest {
         // Переход в корзину
         WebElement cartButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"basketContent\"]/div[3]/a")));
         cartButton.click();
+
+        WebElement product1Title = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[4]/div/div[1]/form/div[1]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/div[1]/div/a/span[1]")));
+        String product1Name = product1Title.getText();
+        System.out.println("Название товара 1: " + product1Name);
+
+        WebElement product2Title = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[4]/div/div[1]/form/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[1]/div/a/span[1]")));
+        String product2Name = product2Title.getText();
+        System.out.println("Название товара 2: " + product2Name);
+
+        WebElement product3Title = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[4]/div/div[1]/form/div[1]/div[1]/div[2]/div/div[2]/div/div/div[3]/div/div[1]/div/a/span[1]")));
+        String product3Name = product3Title.getText();
+        System.out.println("Название товара 3: " + product3Name);
     }
 
-    @AfterTest
-    public void tearDown() {
-        driver.quit();
-    }
+   // @AfterTest
+    //public void tearDown() {
+      //  driver.quit();
+    //}
 }
