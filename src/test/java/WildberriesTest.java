@@ -71,8 +71,8 @@ public class WildberriesTest {
 
     }
 
-   /*@AfterTest
+   @AfterTest
     public void tearDown() {
        driver.quit();
-    */}
+    }
 }
