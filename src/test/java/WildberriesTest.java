@@ -45,17 +45,14 @@ public class WildberriesTest {
         WebElement cartButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"basketContent\"]/div[3]/a")));
         cartButton.click();
 
-        WebElement product1Title = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[4]/div/div[1]/form/div[1]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/div[1]/div/a/span[1]")));
-        String product1Name = product1Title.getText();
-        System.out.println("Название товара 1: " + product1Name);
+        for (int i = 1; i <= 3; i++) {
+            WebElement productNameElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[4]/div/div[1]/form/div[1]/div[1]/div[2]/div/div[2]/div/div/div[" + i + "]/div/div[1]/div/a/span[1]")));
+            String productName = productNameElement.getText();
+            WebElement productQuantityElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[4]/div/div[1]/form/div[1]/div[1]/div[2]/div/div[2]/div/div/div[" + i + "]/div/div[2]/div/div/input")));
+            String productQuantity = productQuantityElement.getAttribute("value");
+            System.out.println("Товар " + i + ": " + productName + ", Количество: " + productQuantity);
+        }
 
-        WebElement product2Title = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[4]/div/div[1]/form/div[1]/div[1]/div[2]/div/div[2]/div/div/div[2]/div/div[1]/div/a/span[1]")));
-        String product2Name = product2Title.getText();
-        System.out.println("Название товара 2: " + product2Name);
-
-        WebElement product3Title = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"app\"]/div[4]/div/div[1]/form/div[1]/div[1]/div[2]/div/div[2]/div/div/div[3]/div/div[1]/div/a/span[1]")));
-        String product3Name = product3Title.getText();
-        System.out.println("Название товара 3: " + product3Name);
     }
 
    // @AfterTest
